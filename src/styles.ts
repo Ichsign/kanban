@@ -6,10 +6,27 @@ interface AddItemButtonProps {
 
 interface DragPreviewContainerProps {
     isHidden?: boolean
+    isPreview?: boolean
 }
 
+type DragPreviewWrapperProps = {
+    position: {
+        x: number
+        y: number
+    }
+}
+
+export const DragPreviewWrapper = styled.div.attrs<DragPreviewWrapperProps>(
+    ({position: { x, y } }) => ({
+        style: {
+            transform: `translate(${x}px, ${y}px`
+        }
+    })
+)<DragPreviewWrapperProps>``
+
 export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
-  opacity: ${props => (props.isHidden ? 0.3 : 1)}
+  transform: ${props => (props.isPreview ? "rotate(5deg)" : undefined)};
+  opacity: ${props => (props.isHidden ? 0 : 1)}
 `
 
 export const AddItemButton = styled.button<AddItemButtonProps>`
@@ -89,4 +106,14 @@ export const CardContainer = styled(DragPreviewContainer)`
   max-width: 300px;
   border-radius: 3px;
   box-shadow: #091e4240 0 1px 0 0;
+`
+
+export const CustomDragLayerContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: 100;
 `
