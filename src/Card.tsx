@@ -1,12 +1,12 @@
 import React, {FC} from "react";
 import { CardContainer } from "./styles";
 
-interface CardProps {
+type CardProps = {
     text: string
-    index: number
+    id: string
 }
 
-export const Card: FC<CardProps> = ({ text, index }: CardProps) => {
+export const Card: FC<CardProps> = ({ text, id }: CardProps) => {
     return (
         <CardContainer>{text}</CardContainer>
     )
