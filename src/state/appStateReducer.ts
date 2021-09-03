@@ -19,8 +19,15 @@ export type AppState = {
     draggedItem: DragItem | null
 }
 
-export const appStateReducer = (draft: AppState, action: Action): AppState | void => {
+export const appStateReducer = (
+    draft: AppState,
+    action: Action
+): AppState | void => {
     switch (action.type) {
+        case "SET_DRAGGED_ITEM": {
+            draft.draggedItem = action.payload;
+            break;
+        }
         case "ADD_LIST": {
             draft.lists.push({
                 id: nanoid(),
@@ -64,10 +71,6 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
             draft.lists[sourceListIndex].tasks.splice(dragIndex, 1);
             // adds the task to the target list
             draft.lists[targetListIndex].tasks.splice(hoverIndex, 0, item);
-            break;
-        }
-        case "SET_DRAGGED_ITEM": {
-            draft.draggedItem = action.payload;
             break;
         }
         default: {
